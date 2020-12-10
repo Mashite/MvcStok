@@ -1,0 +1,25 @@
+﻿@using MvcStok.Models.Entity
+@model TBLSATISLAR
+@{
+    Layout = null;
+}
+
+
+<form method="post" action="/Satis/YeniSatis" class="form-group">
+    <div class="form-group">
+        <label>Ürün Seçiniz</label>
+        @Html.DropDownListFor(m => m.TBLURUNLER.URUNID, (List<SelectListItem>)ViewBag.urn, new { @class = "form-control" })
+        <br />
+        <label>Müsteri Seçiniz</label>
+        @Html.DropDownListFor(m => m.TBLMUSTERILER.MUSTERIID, (List<SelectListItem>)ViewBag.mstr, new { @class = "form-control" })
+        <br />
+        <label>Adet</label>
+        @Html.TextAreaFor(m => m.ADET, new { @class = "form-control" })
+        <br />
+        <label>Fiyat</label>
+        @Html.TextAreaFor(m => m.FIYAT, new { @class = "form-control" })
+        <br />
+        <button class="btn btn-info">Satış İşlemi Yap</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+    </div>
+</form>

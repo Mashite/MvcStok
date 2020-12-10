@@ -1,0 +1,52 @@
+﻿@using MvcStok.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<TBLSATISLAR>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>URUN</th>
+        <th>MÜŞTERİ</th>
+        <th>ADET</th>
+        <th>FİYAT</th>
+    </tr>
+    <tbody>
+        @foreach (var sts in Model)
+        {
+            <tr>
+                <td>@sts.TBLURUNLER.URUNADI</td>
+                <td>@sts.TBLMUSTERILER.MUSTERIAD  @sts.TBLMUSTERILER.MUSTERIAD</td>
+                <td>@sts.ADET</td>
+                <td>@sts.FIYAT</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+<button type="button" class="btn btn-primary" onclick="SatisYap()" data-toggle="modal" data-target="#Modal1">
+    Satış Yap
+</button>
+<div class="modal" id="Modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Satış Ekranı</h2>
+            </div>
+            <div class="modal-body" id="satisModalbady">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var SatisYap = function () {
+        var url = "/Satis/YeniSatis";
+        $("#satisModalbady").load(url, function () {
+            $("#Modal1").modal("show");
+        })
+    }
+</script>
